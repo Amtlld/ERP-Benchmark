@@ -101,3 +101,11 @@ python -u run.py --method MedGNN \
 --testing_datasets NSERP-ODD \
 --e_layers 6 --batch_size 128 --n_heads 8 --d_model 128 --d_ff 256 --resolution_list 2,4,6,8 --nodedim 10 --swa \
 --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
+
+# Benchmark
+python -u run.py --method MedGNN \
+--task_name supervised --is_training 1 --root_path ./dataset/200Hz/ --model_id S-Benchmark --model MedGNN --data MultiDatasets \
+--training_datasets Benchmark \
+--testing_datasets Benchmark \
+--e_layers 6 --batch_size 128 --n_heads 8 --d_model 128 --d_ff 256 --resolution_list 2,4,6,8 --nodedim 10 --swa \
+--des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15

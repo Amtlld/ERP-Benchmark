@@ -1,6 +1,14 @@
 import argparse
 import os
 import torch
+
+# Explicitly declare and enable FP32/TF32 Tensor Cores acceleration 
+# to improve training/testing speed on Ampere+ GPUs (like RTX 3070)
+torch.set_float32_matmul_precision('high')
+torch.backends.cudnn.allow_tf32 = True
+torch.backends.cuda.matmul.allow_tf32 = True
+torch.backends.cudnn.benchmark = True
+
 from exp.exp_supervised import Exp_Supervised
 import random
 import numpy as np

@@ -5,3 +5,5 @@ checkpoints/
 results/
 # Raw data
 dataset/
+*.mat
+training_log_*.txt

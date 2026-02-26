@@ -20,6 +20,28 @@ class FullAttention(nn.Module):
         _, S, _, D = values.shape
         scale = self.scale or 1. / sqrt(E)
 
+        if not self.output_attention:
+            q = queries.transpose(1, 2)
+            k = keys.transpose(1, 2)
+            v = values.transpose(1, 2)
+            
+            use_causal = False
+            pt_mask = None
+            if self.mask_flag:
+                if attn_mask is None:
+                    use_causal = True
+                else:
+                    pt_mask = ~attn_mask.mask
+            
+            V = torch.nn.functional.scaled_dot_product_attention(
+                q, k, v,
+                attn_mask=pt_mask,
+                dropout_p=self.dropout.p if self.training else 0.0,
+                is_causal=use_causal,
+                scale=scale
+            )
+            return V.transpose(1, 2).contiguous(), None
+
         scores = torch.einsum("blhe,bshe->bhls", queries, keys)
 
         if self.mask_flag:
@@ -193,6 +215,28 @@ class DifferenceAttention(nn.Module):
         B, L, H, E = queries.shape
         _, S, _, D = values.shape
         scale = self.scale or 1.0 / sqrt(E)
+
+        if not self.output_attention:
+            q = queries.transpose(1, 2)
+            k = keys.transpose(1, 2)
+            v = values.transpose(1, 2)
+            
+            use_causal = False
+            pt_mask = None
+            if self.mask_flag:
+                if attn_mask is None:
+                    use_causal = True
+                else:
+                    pt_mask = ~attn_mask.mask
+            
+            V = torch.nn.functional.scaled_dot_product_attention(
+                q, k, v,
+                attn_mask=pt_mask,
+                dropout_p=self.dropout.p if self.training else 0.0,
+                is_causal=use_causal,
+                scale=scale
+            )
+            return V.transpose(1, 2).contiguous(), None
 
         scores = torch.einsum("blhe,bshe->bhls", queries, keys)
 

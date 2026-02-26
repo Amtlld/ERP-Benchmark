@@ -101,3 +101,11 @@ python -u run.py --method TimesNet \
 --testing_datasets NSERP-ODD \
 --e_layers 2 --batch_size 128 --top_k 1 --d_model 32 --d_ff 64 --swa \
 --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
+
+# Benchmark
+python -u run.py --method TimesNet \
+--task_name supervised --is_training 1 --root_path ./dataset/200Hz/ --model_id S-Benchmark --model TimesNet --data MultiDatasets \
+--training_datasets Benchmark \
+--testing_datasets Benchmark \
+--e_layers 2 --batch_size 128 --top_k 1 --d_model 32 --d_ff 64 --swa \
+--des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15

@@ -213,8 +213,8 @@ def load_data_by_ids(data_path, label_path, ids, args):
         if sub_id in ids:
             sub_feature_path = os.path.join(data_path, feature_filename)
             sub_label_path = os.path.join(label_path, label_filename)
-            subject_feature = np.load(sub_feature_path)  # (N, T, C)
-            subject_label = np.load(sub_label_path)   # (N, xxx), column number depends on dataset
+            subject_feature = np.load(sub_feature_path).astype(np.float32)  # (N, T, C), force FP32
+            subject_label = np.load(sub_label_path).astype(np.float32)   # (N, xxx), force FP32
             if subject_feature.shape[0] != subject_label.shape[0]:
                 print(f"Subject {sub_id} data and label length mismatch: " 
                       f"{subject_feature.shape[0]} vs {subject_label.shape[0]}, skipped")

@@ -89,3 +89,10 @@ python -u run.py --method CBraMod --checkpoints_path ./checkpoints/CBraMod/pretr
 --training_datasets NSERP-ODD \
 --testing_datasets NSERP-ODD \
 --batch_size 32 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
+
+# Benchmark
+python -u run.py --method CBraMod --checkpoints_path ./checkpoints/CBraMod/pretrain_cbramod/CBraMod/pretrained_weights.pth \
+--task_name supervised --is_training 1 --root_path ./dataset/200Hz/ --model_id S-Benchmark --model CBraMod --data MultiDatasets \
+--training_datasets Benchmark \
+--testing_datasets Benchmark \
+--batch_size 128 --swa --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15

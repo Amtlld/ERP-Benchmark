@@ -101,3 +101,11 @@ python -u run.py --method EEGFeatures \
 --testing_datasets NSERP-ODD \
 --batch_size 128 --swa \
 --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
+
+# Benchmark
+python -u run.py --method EEGFeatures \
+--task_name supervised --is_training 1 --root_path ./dataset/200Hz/ --model_id S-Benchmark --model EEGFeatures --data MultiDatasets \
+--training_datasets Benchmark \
+--testing_datasets Benchmark \
+--batch_size 128 --swa \
+--des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15

@@ -26,6 +26,7 @@ from data_provider.dataset_loader.aopd_loader import AOPDLoader
 from data_provider.dataset_loader.adhd_wmri_loader import ADHDWMRILoader
 from data_provider.dataset_loader.nserp_msit_loader import NSERPMSITLoader
 from data_provider.dataset_loader.nserp_odd_loader import NSERPODDLoader
+from data_provider.dataset_loader.benchmark_loader import BenchmarkLoader
 
 # data folder dict to loader mapping
 data_folder_dict = {
@@ -43,6 +44,7 @@ data_folder_dict = {
     'ADHD-WMRI': ADHDWMRILoader,
     'NSERP-MSIT': NSERPMSITLoader,
     'NSERP-ODD': NSERPODDLoader,
+    'Benchmark': BenchmarkLoader,
 }
 warnings.filterwarnings('ignore')
 
@@ -98,8 +100,8 @@ class MultiDatasetsLoader(Dataset):
         print()
 
     def __getitem__(self, index):
-        return torch.from_numpy(self.X[index]), \
-               torch.from_numpy(np.asarray(self.y[index]))
+        return torch.from_numpy(self.X[index]).float(), \
+               torch.from_numpy(np.asarray(self.y[index])).float()
 
     def __len__(self):
         return len(self.y)

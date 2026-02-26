@@ -101,3 +101,11 @@ python -u run.py --method ModernTCN \
 --testing_datasets NSERP-ODD \
 --batch_size 512 --ffn_ratio 1 --patch_len 32 --stride 16 --num_blocks 1 1 1 --large_size 9 9 9 --small_size 5 5 5 --dims 32 64 128 --swa \
 --des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
+
+# Benchmark
+python -u run.py --method ModernTCN \
+--task_name supervised --is_training 1 --root_path ./dataset/200Hz/ --model_id S-Benchmark --model ModernTCN --data MultiDatasets \
+--training_datasets Benchmark \
+--testing_datasets Benchmark \
+--batch_size 512 --ffn_ratio 1 --patch_len 32 --stride 16 --num_blocks 1 1 1 --large_size 9 9 9 --small_size 5 5 5 --dims 32 64 128 --swa \
+--des 'Exp' --itr 5 --learning_rate 0.0001 --train_epochs 200 --patience 15
